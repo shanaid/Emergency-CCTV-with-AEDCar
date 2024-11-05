@@ -1,0 +1,13 @@
+services:
+  frontend:
+    image: safetycar-dev-frontend:latest
+    container_name: safetycar-dev-frontend
+    networks:
+      - frontend-network
+    # restart: unless-stopped
+    expose:
+      - "80" # 프론트가 nginx를 가지고 있으므로 컨테이너에서는 80포트를 연 상태
+
+networks:
+  frontend-network:
+    external: true

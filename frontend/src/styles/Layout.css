@@ -1,0 +1,58 @@
+/* layout.css */
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  width: 80px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 1;
+  padding-top: 200px;
+  /* 기존 Navbar 스타일 */
+}
+
+.content {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+  z-index: 1;
+  /* 기타 스타일 */
+}
+
+/* 헤더 컨테이너 스타일 */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logo img {
+  padding-top: 20px;
+  height: 120px; /* 로고 이미지 높이 조정 */
+}
+
+.header-container h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0; /* 기본 마진 제거 */
+  color: white;
+  font-weight: bolder;
+}
+
+.current-time {
+  font-size: 20px;
+  color: white;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-time div {
+  margin-top: 5px;
+}

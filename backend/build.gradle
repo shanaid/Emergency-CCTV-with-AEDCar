@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.safe'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.6.0'
+
+    //문자 서비스
+    implementation 'net.nurigo:sdk:4.3.0'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    // https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-ip
+    implementation 'org.springframework.integration:spring-integration-ip'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-integration
+    implementation 'org.springframework.boot:spring-boot-starter-integration'
+    // https://mvnrepository.com/artifact/org.java-websocket/Java-WebSocket
+//	implementation 'org.java-websocket:Java-WebSocket'
+    // https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
+    compileOnly 'jakarta.servlet:jakarta.servlet-api'
+    // https://mvnrepository.com/artifact/jakarta.websocket/jakarta.websocket-client-api
+    compileOnly 'jakarta.websocket:jakarta.websocket-client-api'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,22 @@
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  z-index: 1000;
+}
+
+.nav-item {
+  width: 69px;
+  height: 71px;
+  background: rgba(3, 5, 10, 0.190837) 25.52%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  margin-bottom: 15px; /* 항목 간격 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-icon {
+  width: 40px; /* 원하는 너비 */
+  height: 40px; /* 원하는 높이 */
+}

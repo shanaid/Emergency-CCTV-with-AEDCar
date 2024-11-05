@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+
+    environment {
+        TARGET_BRANCH='develop/be'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // def branch = env.gitlabSourceBranch ?: 'develop/be'
+                    // if(branch != env.TARGET_BRANCH) {
+                    //     error "This build is only for the '${env.TARGET_BRANCH}' branch, but was run on '${branch}'"
+                    // }
+
+                    checkout scm
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('backend') {
+                    withCredentials([file(credentialsId: 'APPLICATION_YML', variable: 'application_yml')]) {
+                        sh 'cp $application_yml ./src/main/resources/application.yml'
+                    }
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean build --no-daemon' // 디버깅을 위해 캐시하지 않기
+                    // sh './gradlew test -i'
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                     sh 'docker build -t safetycar-dev-backend:latest ./backend'
+                }
+            }
+        }
+        stage('Depoly') {
+            steps {
+                dir ('backend') {
+                    script {
+                         sh 'docker-compose up -d'
+                    }
+                }
+
+            }
+        }
+        stage('Remove old Image') {
+            steps {
+                script {
+                    sh 'docker image prune -f'
+                }
+            }
+        }
+
+    }
+}

@@ -1,0 +1,13 @@
+services:
+  pybackend:
+    image: safetycar-dev-pybackend:latest
+    container_name: safetycar-dev-pybackend
+    networks:
+      - backend-network
+    # restart: unless-stopped
+    expose:
+      - "8000"
+
+networks:
+  backend-network:
+    external: true

@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+
+    environment {
+        TARGET_BRANCH='develop/fe'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // def branch = env.gitlabSourceBranch ?: 'develop/fe'
+                    // if(branch != env.TARGET_BRANCH) {
+                    //     error "This build is only for the '${env.TARGET_BRANCH}' branch, but was run on '${branch}'"
+                    // }
+
+                    checkout scm
+                }
+            }
+        }
+
+        stage('Set .ENV File') {
+            steps {
+                dir('frontend') {
+                    withCredentials([file(credentialsId: 'ENV_FILE', variable: 'env_file')]) {
+                        sh 'cp $env_file ./.env'
+                    }
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build --no-cache -t safetycar-dev-frontend:latest ./frontend'
+                    // sh 'docker build -t ptpt-dev-frontend:latest ./frontend'
+                }
+            }
+        }
+
+        stage('Depoly') {
+            steps {
+                dir('frontend') {
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+
+        stage('Remove old image') {
+            steps {
+                script {
+                    sh 'docker image prune -f'
+                }
+            }
+        }
+    }
+}

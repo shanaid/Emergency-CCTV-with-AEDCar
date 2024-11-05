@@ -1,0 +1,22 @@
+.title {
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+
+/* 배경 */
+.loginbox {
+  width: 60vh;
+  height: 60vh;
+  background-color: rgba(255, 255, 255, 0.5); /* 하얀색 반투명 */
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 제목, loginform */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout scm
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                     sh 'docker build -t safetycar-dev-pybackend:latest ./coordinate'
+                }
+            }
+        }
+        stage('Depoly') {
+            steps {
+                dir ('coordinate') {
+                    script {
+                         sh 'docker-compose up -d'
+                    }
+                }
+
+            }
+        }
+        stage('Remove old Image') {
+            steps {
+                script {
+                    sh 'docker image prune -f'
+                }
+            }
+        }
+
+    }
+}

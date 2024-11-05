@@ -1,0 +1,67 @@
+/* Navbar Styles */
+
+.modalbackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 다른 요소들보다 위로 올리기 위해 z-index 설정 */
+}
+
+/* 모달의 컨텐츠 */
+.modalcontent {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 350px;
+  background: #1f1b29;
+  padding: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 1010; /* 컨텐츠도 z-index를 높게 설정 */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.modalcontent h2 {
+  margin-bottom: 20px;
+  color: #ffffff; /* 글씨 색 */
+}
+
+.modalcontent p {
+  color: #cccccc;
+  margin-bottom: 30px;
+  white-space: pre-wrap; /* \n이 줄바꿈으로 인식되도록 설정 */
+}
+
+.modalcontent button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 5px 30px;
+}
+
+.modalcontent button:hover {
+  background: linear-gradient(90deg, #8f94fb 0%, #4e54c8 100%);
+}
+
+.modalcontent button + button {
+  background: #444054;
+}
+
+.modalcontent button + button:hover {
+  background: #5c5870;
+}
